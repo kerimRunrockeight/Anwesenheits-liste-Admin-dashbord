@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="index.css">
+    <style>
+       
+    </style>
+</head>
+
+<body>
+ <!-------body------>
+
+    <div class="header">
+    
+    </div>
+    <div class="head">
+        <h1>
+            <img src="bbw_logo_256px.PNG" alt="bbw Logo">
+        </h1>
+        <ul>
+            <li><a href="#">Abteilung</a></li>
+            <li><a href="#">Verfügbarkeit</a></li>
+            <li><a href="#">Wochen</a></li>
+            <li><a href="#">Tage</a></li>
+            <li><a href="#">Ausbildungsjahr</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Hilfe</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="table-1">
+            <h1>ICP Anwesenheitsliste Admin Dashboard</h1>
+            
+            <div class="add-user">
+                <input type="text" id="userName" placeholder="Benutzername" required>
+                <input type="text" id="department" placeholder="Abteilung" required>
+                <input type="text" id="year" placeholder="Ausbildungsjahr" required>
+                <input type="time" id="time" required>
+                <button onclick="addUser()">Benutzer hinzufügen</button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Abteilung</th>
+                        <th>Verfügbarkeit</th>
+                        <th>Montag</th>
+                        <th>Dienstag</th>
+                        <th>Mittwoch</th>
+                        <th>Donnertag</th>
+                        <th>Freitag</th>
+                        <th>Ausbildungsjahr</th>
+                        <th>Aktionen</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <tr>
+                        <td>Karim Bedoui</td>
+                        <td>FIT</td>
+                        <td>
+                            <select>
+                                <option value="verfügbar">Verfügbar</option>
+                                <option value="nicht_verfügbar">Verspätet</option>
+                                <option value="nicht_verfügbar">Krank</option>
+                            </select>
+                        </td>
+                        <td>BS</td>
+                        <td>Betrieb</td>
+                        <td>Betrieb</td>
+                        <td>Betrieb</td>
+                        <td>BS</td>
+                        <td>1</td>
+
+                        
+                        <td><button class="remove-button" onclick="removeUser(this)">Entfernen</button></td>
+                    </tr>
+                    <!-- Weitere Benutzer hier -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function addUser() {
+            const userName = document.getElementById("userName").value;
+            const department = document.getElementById("department").value;
+            const year = document.getElementById("year").value;
+            const time = document.getElementById("time").value;
+
+            if (userName && department && year && time) {
+                const tableBody = document.getElementById("userTableBody");
+                const newRow = document.createElement("tr");
+
+                newRow.innerHTML = `
+                    <td>${userName}</td>
+                    <td>${department}</td>
+                    <td>
+                        <select>
+                            <option value="verfügbar">Verfügbar</option>
+                            <option value="nicht_verfügbar">Verspätet</option>
+                            <option value="nicht_verfügbar">Krank</option>
+                        </select>
+                    </td>
+                    <td>Betrieb</td>
+                    <td>Betrieb</td>
+                    <td>Betrieb</td>
+                    <td>Betrieb</td>
+                    <td>BS</td>
+                    <td>${year}</td>
+                    <td><button class="remove-button" onclick="removeUser(this)">Entfernen</button></td>
+                `;
+                
+                tableBody.appendChild(newRow);
+                document.getElementById("userName").value = '';
+                document.getElementById("department").value = '';
+                document.getElementById("year").value = '';
+                document.getElementById("time").value = '';
+            } else {
+                alert("Bitte alle Felder ausfüllen.");
+            }
+        }
+
+        function removeUser(button) {
+            const row = button.closest("tr");
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
